@@ -15,7 +15,13 @@ struct HomeScreenView: View {
     
     // MARK: VIEW
     var body: some View {
-        Text("Hello World")
-            .padding()
+        NavigationView {
+            ScrollView {
+                ForEach(ViewModel.charactersArray, id: \.id) { character in
+                    CharacterView(character: character)
+                }
+            }
+            .navigationBarTitle("Rick & Morty Character List", displayMode: .inline)
+        }
     }
 }
