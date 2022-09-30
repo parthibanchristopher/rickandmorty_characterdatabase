@@ -12,7 +12,7 @@ class HomeScreenViewModel: ObservableObject {
     
     // MARK: PROPERTIES
     @Published var charactersArray = [CharacterModel]()
-    @Published var displayMessage = ""
+    @Published var displayMessage = displayMessageString.loading.rawValue
     
     enum displayMessageString: String {
         case loading = "Loading Data... Please Wait...",
@@ -22,9 +22,22 @@ class HomeScreenViewModel: ObservableObject {
     
     // MARK: INITIALISATION
     init() {
-        retrieveJsonData() { retrievedData in
-            self.loadCharacterArray(jsonData: retrievedData)
+        let networkCall = NetworkManager.shared.prepareNetworkRequest(urlString: "https://rickandmortyapi.com/api/character/")
+        let networkRequest = networkCall.request
+        if networkRequest != nil {
+            let data = NetworkManager.shared.processNetworkRequest(request: networkRequest!)
+            { data, error in
+                if data != nil {
+                    self.loadCharacterArray(jsonData: data!)
+                }
+                else {
+                    DispatchQueue.main.async {
+                        self.displayMessage = error!.localizedDescription
+                    }
+                }
+            }
         }
+        
     }
     
     // MARK: FUNCTIONS

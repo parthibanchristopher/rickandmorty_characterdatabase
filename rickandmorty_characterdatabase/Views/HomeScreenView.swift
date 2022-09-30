@@ -16,14 +16,20 @@ struct HomeScreenView: View {
     // MARK: VIEW
     var body: some View {
         NavigationView {
-            ScrollView {
-                ForEach(ViewModel.charactersArray, id: \.id) { character in
-                    NavigationLink(destination: DetailScreenView(character: character)) {
-                        CharacterView(character: character)
+            if ViewModel.charactersArray.isEmpty {
+                Text(ViewModel.displayMessage)
+                    .padding()
+            }
+            else {
+                ScrollView {
+                    ForEach(ViewModel.charactersArray, id: \.id) { character in
+                        NavigationLink(destination: DetailScreenView(character: character)) {
+                            CharacterView(character: character)
+                        }
                     }
                 }
+                .navigationBarTitle("Rick & Morty Character List", displayMode: .inline)
             }
-            .navigationBarTitle("Rick & Morty Character List", displayMode: .inline)
         }
     }
 }
