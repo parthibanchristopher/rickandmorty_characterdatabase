@@ -18,6 +18,7 @@
 		84F0C08C28E68925006371A6 /* StaticJsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C08B28E68925006371A6 /* StaticJsonData.swift */; };
 		84F0C08E28E69130006371A6 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C08D28E69130006371A6 /* CharacterView.swift */; };
 		84F0C09028E69253006371A6 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C08F28E69253006371A6 /* HomeScreenViewModel.swift */; };
+		84F0C09228E6A936006371A6 /* DetailScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0C09128E6A936006371A6 /* DetailScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		84F0C08B28E68925006371A6 /* StaticJsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticJsonData.swift; sourceTree = "<group>"; };
 		84F0C08D28E69130006371A6 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		84F0C08F28E69253006371A6 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		84F0C09128E6A936006371A6 /* DetailScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				84F0C05A28E68152006371A6 /* HomeScreenView.swift */,
+				84F0C09128E6A936006371A6 /* DetailScreenView.swift */,
 				84F0C08D28E69130006371A6 /* CharacterView.swift */,
 			);
 			path = Views;
@@ -304,6 +307,7 @@
 				84F0C05B28E68152006371A6 /* HomeScreenView.swift in Sources */,
 				84F0C09028E69253006371A6 /* HomeScreenViewModel.swift in Sources */,
 				84F0C08C28E68925006371A6 /* StaticJsonData.swift in Sources */,
+				84F0C09228E6A936006371A6 /* DetailScreenView.swift in Sources */,
 				84F0C08E28E69130006371A6 /* CharacterView.swift in Sources */,
 				84F0C05928E68152006371A6 /* rickandmorty_characterdatabaseApp.swift in Sources */,
 				84F0C08628E681FD006371A6 /* CharacterModels.swift in Sources */,

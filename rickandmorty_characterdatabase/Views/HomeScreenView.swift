@@ -18,7 +18,9 @@ struct HomeScreenView: View {
         NavigationView {
             ScrollView {
                 ForEach(ViewModel.charactersArray, id: \.id) { character in
-                    CharacterView(character: character)
+                    NavigationLink(destination: DetailScreenView(character: character)) {
+                        CharacterView(character: character)
+                    }
                 }
             }
             .navigationBarTitle("Rick & Morty Character List", displayMode: .inline)
