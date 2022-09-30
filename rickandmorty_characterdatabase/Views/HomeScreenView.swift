@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-// MARK: Home Screen View
+// MARK: HOME SCREEN VIEW
 struct HomeScreenView: View {
     
+    // MARK: PROPERTIES
+    @StateObject private var ViewModel = HomeScreenViewModel()
+    
+    // MARK: VIEW
     var body: some View {
         Text("Hello World")
             .padding()
