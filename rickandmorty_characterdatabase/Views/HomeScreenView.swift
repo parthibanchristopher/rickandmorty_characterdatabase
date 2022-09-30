@@ -9,8 +9,9 @@ import SwiftUI
 
 // MARK: Home Screen View
 struct HomeScreenView: View {
+    
     var body: some View {
-        Text("Hello, world!")
+        Text("Hello World")
             .padding()
     }
 }
