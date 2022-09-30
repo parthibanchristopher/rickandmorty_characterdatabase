@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: FULL JSON DATA FORMAT
+// MARK: FULL JSON DATA
 let staticFullJSON = """
 {
     "info": {
@@ -227,6 +227,7 @@ let staticFullJSON = """
 }
 """.data(using: .utf8)!
 
+// MARK: SINGLE CHARACTER JSON DATA
 let characterJSON = """
 {
     "id": 1,
