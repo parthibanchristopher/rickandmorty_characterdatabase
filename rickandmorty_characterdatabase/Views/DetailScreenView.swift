@@ -37,7 +37,6 @@ struct DetailScreenView: View {
                 
                 Text("List of Episodes:\n\(createstring(episodelist: character.episode))")
                     .padding(.vertical)
-
             }
             .padding()
         }
@@ -56,30 +55,22 @@ struct DetailScreenView: View {
             else {
                 returnEpisodeString.append("Episode \(episodeArray.last!), ")
             }
-            
         }
         return returnEpisodeString
     }
     
     // function to convert given string date to display short date format
     func createDate(longDate: String) -> String {
-        var returnString = ""
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         
-        do {
-            let dateObject = try dateFormatter.date(from: longDate)
-            
-            let dateFormatter2 = DateFormatter()
-            dateFormatter2.dateStyle = .short
-            
-            returnString = dateFormatter2.string(from: dateObject!)
-            
-        }
-        catch {
-            returnString = "Error Compiling Date"
-        }
+        let dateObject = dateFormatter.date(from: longDate)
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateStyle = .short
+        
+        let returnString = dateFormatter2.string(from: dateObject!)
         
         return returnString
     }

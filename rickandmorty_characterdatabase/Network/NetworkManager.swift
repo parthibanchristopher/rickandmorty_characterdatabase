@@ -26,7 +26,7 @@ final class NetworkManager {
         }
     }
     
-    func processNetworkRequest(request: URLRequest, completion: @escaping (Data?, Error?) -> Void) {
+    func processNetworkRequest(request: URLRequest, completion: @escaping (Data?, Error?) -> ()) {
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             

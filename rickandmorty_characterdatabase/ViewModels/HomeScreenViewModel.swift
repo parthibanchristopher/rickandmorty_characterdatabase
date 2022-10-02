@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: HOME SCREEN VIEW MODEL
+// MARK: HOME SCREEN VIEWMODEL
 class HomeScreenViewModel: ObservableObject {
     
     // MARK: PROPERTIES
@@ -20,15 +20,30 @@ class HomeScreenViewModel: ObservableObject {
         success = "Loading Successful."
     }
     
+    enum errorMessage: Error, LocalizedError {
+      case decodingError
+        
+        public var errorDescription: String? {
+            switch self {
+            case .decodingError: return NSLocalizedString("Error Decoding Data", comment: "My error")
+            }
+        }
+    }
+    
     // MARK: INITIALISATION
     init() {
-        let networkCall = NetworkManager.shared.prepareNetworkRequest(urlString: "https://rickandmortyapi.com/api/character/")
+        let networkCall = NetworkManager.shared.prepareNetworkRequest(urlString: "https://rickandmortyapi.com/api/character/") // TODO: CLEAN UP URL
+        
         let networkRequest = networkCall.request
         if networkRequest != nil {
-            let data = NetworkManager.shared.processNetworkRequest(request: networkRequest!)
+            
+            NetworkManager.shared.processNetworkRequest(request: networkRequest!)
             { data, error in
                 if data != nil {
-                    self.loadCharacterArray(jsonData: data!)
+                    DispatchQueue.main.async {
+                        let receivedData = self.loadCharacterArray(jsonData: data!)
+                        self.charactersArray = receivedData.array
+                    }
                 }
                 else {
                     DispatchQueue.main.async {
@@ -37,60 +52,28 @@ class HomeScreenViewModel: ObservableObject {
                 }
             }
         }
-        
     }
     
     // MARK: FUNCTIONS
     
-    // function to make network call and retrieve json data
-    func retrieveJsonData(completion: @escaping (Data) -> ()){
-        
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character/") else {
-            self.displayMessage = displayMessageString.error.rawValue
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else {
-                self.displayMessage = displayMessageString.error.rawValue
-                return
-            }
-            
-            do {
-                _ = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                completion(data)
-                
-            }
-            catch {
-                DispatchQueue.main.async {
-                    self.displayMessage = displayMessageString.error.rawValue
-                }
-            }
-        }
-        task.resume()
-    }
-    
     // function to decode json data and load it into array
-    func loadCharacterArray(jsonData: Data){
+    func loadCharacterArray(jsonData: Data) -> (array: [CharacterModel], error: Error?){
+        var charactersArray = [CharacterModel]()
+        
         do {
             let listOfCharacters = try JSONDecoder().decode(FullData.self, from: jsonData)
             
             DispatchQueue.main.async {
                 self.displayMessage = displayMessageString.success.rawValue
-                self.charactersArray = listOfCharacters.results
-                // saves the list of characters into array
             }
+            charactersArray = listOfCharacters.results
+            return (charactersArray, nil)
         }
         catch {
             DispatchQueue.main.async {
                 self.displayMessage = displayMessageString.error.rawValue
             }
+            return (charactersArray, errorMessage.decodingError)
         }
     }
-    
 }

@@ -8,6 +8,8 @@
 import Foundation
 
 // MARK: FULL JSON DATA
+
+// returns an array with 3 characters
 let staticFullJSON = """
 {
     "info": {
