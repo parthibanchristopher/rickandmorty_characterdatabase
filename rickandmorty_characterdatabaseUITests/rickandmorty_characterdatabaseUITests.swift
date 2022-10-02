@@ -6,37 +6,59 @@
 //
 
 import XCTest
+import rickandmorty_characterdatabase
 
 class rickandmorty_characterdatabaseUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    // MARK: TEST HOME SCREEN UI
+    // tests the existence of the UI elements on the home screen and checks if the total number of character elements present and the intended number of characters per page is the same
+    func test_HomeScreen_UI() {
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let elementsQuery = app.scrollViews.otherElements
+        
+        XCTAssert(elementsQuery.buttons.count == 20)
+        
+        XCTAssert(elementsQuery.buttons["Character 1"].exists)
+        XCTAssert(elementsQuery.buttons["Character 2"].exists)
+        XCTAssert(elementsQuery.buttons["Character 3"].exists)
+        XCTAssert(elementsQuery.buttons["Character 4"].exists)
+        XCTAssert(elementsQuery.buttons["Character 5"].exists)
+        XCTAssert(elementsQuery.buttons["Character 6"].exists)
+        XCTAssert(elementsQuery.buttons["Character 7"].exists)
+        XCTAssert(elementsQuery.buttons["Character 8"].exists)
+        XCTAssert(elementsQuery.buttons["Character 9"].exists)
+        XCTAssert(elementsQuery.buttons["Character 10"].exists)
+        XCTAssert(elementsQuery.buttons["Character 11"].exists)
+        XCTAssert(elementsQuery.buttons["Character 12"].exists)
+        XCTAssert(elementsQuery.buttons["Character 13"].exists)
+        XCTAssert(elementsQuery.buttons["Character 14"].exists)
+        XCTAssert(elementsQuery.buttons["Character 15"].exists)
+        XCTAssert(elementsQuery.buttons["Character 16"].exists)
+        XCTAssert(elementsQuery.buttons["Character 17"].exists)
+        XCTAssert(elementsQuery.buttons["Character 18"].exists)
+        XCTAssert(elementsQuery.buttons["Character 19"].exists)
+        XCTAssert(elementsQuery.buttons["Character 20"].exists)
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    // MARK: TEST DETAIL SCREEN UI
+    // test the existence of the UI elements of the detail screen
+    func test_DetailScreen_UI() {
+        let app = XCUIApplication()
+        app.launch()
+        let elementsQuery = app.scrollViews.otherElements
+        
+        // button tap from home screen to detail screen
+        XCTAssert(elementsQuery.buttons["Character 7"].exists)
+        elementsQuery.buttons["Character 7"].tap()
+        
+        XCTAssert(elementsQuery.staticTexts["Character Name"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Species"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Gender"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Origin"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Date"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Status"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Location"].exists)
+        XCTAssert(elementsQuery.staticTexts["Character Episodes"].exists)
     }
 }

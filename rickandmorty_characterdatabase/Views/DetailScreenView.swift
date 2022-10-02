@@ -21,22 +21,25 @@ struct DetailScreenView: View {
         
         ScrollView {
             AsyncImage(url: URL(string: character.image))
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(spacing: 10) {
                 
                 Text(character.name)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .padding(.vertical)
+                    .accessibilityIdentifier("Character Name")
                 
-                Text("Species: \(character.species)")
-                Text("Gender: \(character.gender)")
-                Text("Origin: \(character.origin.name)")
-                Text("Created On: \(createDate(longDate: character.created))")
-                Text("Current Status: \(character.status)")
-                Text("Current Location: \(character.location.name)")
+                Text("Species: \(character.species)").accessibilityIdentifier("Character Species")
+                Text("Gender: \(character.gender)").accessibilityIdentifier("Character Gender")
+                Text("Origin: \(character.origin.name)").accessibilityIdentifier("Character Origin")
+                Text("Created On: \(createDate(longDate: character.created))").accessibilityIdentifier("Character Date")
+                Text("Current Status: \(character.status)").accessibilityIdentifier("Character Status")
+                Text("Current Location: \(character.location.name)").accessibilityIdentifier("Character Location")
                 
-                Text("List of Episodes:\n\(createstring(episodelist: character.episode))")
+                Text("List of Episode Appearance:\n\(createstring(episodelist: character.episode))")
                     .padding(.vertical)
+                    .accessibilityIdentifier("Character Episodes")
+                    .multilineTextAlignment(.center)
             }
             .padding()
         }

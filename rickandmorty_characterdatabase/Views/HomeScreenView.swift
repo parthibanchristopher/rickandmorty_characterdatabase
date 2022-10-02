@@ -25,7 +25,7 @@ struct HomeScreenView: View {
                     ForEach(ViewModel.charactersArray, id: \.id) { character in
                         NavigationLink(destination: DetailScreenView(character: character)) {
                             CharacterView(character: character)
-                        }
+                        }.accessibilityIdentifier("Character \(character.id)")
                     }
                 }
                 .navigationBarTitle("Rick & Morty Character List", displayMode: .inline)
